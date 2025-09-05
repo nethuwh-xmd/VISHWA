@@ -3,29 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <title>VISHWA EDUCATION</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans+Sinhala&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: sans-serif;
-      background-color: #f9f9f9;
+      font-family: 'Noto Sans Sinhala', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://files.catbox.moe/14fj9q.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #ffffff;
       text-align: center;
-      padding: 2rem;
     }
+
+    #loadingScreen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #loadingText {
+      font-family: 'Bangers', cursive;
+      font-size: 3.5rem;
+      animation: pulse 1.5s infinite;
+      color: #00FFCC;
+      text-shadow: 0 0 20px #00FFCC;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.2; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1.05); }
+      100% { opacity: 0.2; transform: scale(0.95); }
+    }
+
+    h1 {
+      font-family: 'Bangers', cursive;
+      font-size: 3rem;
+      color: #ff4081;
+      text-shadow: 2px 2px 10px #000;
+      margin-top: 2rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      color: #00e5ff;
+      text-shadow: 1px 1px 5px #000;
+    }
+
     .btn {
-      padding: 10px 20px;
+      padding: 12px 24px;
       margin: 10px;
-      background-color: #00796B;
+      background: linear-gradient(135deg, #ff4081, #7c4dff);
       color: white;
+      font-weight: bold;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease;
     }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    #gradeButtons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 150px;
+    }
+
     #gradeView, #adminPanel {
       display: none;
       margin-top: 20px;
     }
+
     .video-entry {
       margin: 10px 0;
     }
+
     .delete-btn {
       background-color: red;
       color: white;
@@ -35,44 +99,66 @@
       cursor: pointer;
       border-radius: 4px;
     }
+
+    input[type="text"] {
+      padding: 8px;
+      border-radius: 4px;
+      border: none;
+      width: 80%;
+      max-width: 500px;
+    }
   </style>
 </head>
 <body>
 
-  <h1>VISHWA EDUCATION</h1>
-  <h3>පන්ති තෝරන්න</h3>
-  <div id="gradeButtons">
-    <button class="btn" onclick="accessGrade('6')">6 වසර</button>
-    <button class="btn" onclick="accessGrade('7')">7 වසර</button>
-    <button class="btn" onclick="accessGrade('8')">8 වසර</button>
-    <button class="btn" onclick="accessGrade('9')">9 වසර</button>
-    <button class="btn" onclick="accessGrade('10')">10 වසර</button>
-    <button class="btn" onclick="accessGrade('11')">11 වසර</button>
+  <div id="loadingScreen">
+    <h1 id="loadingText">VISHWA</h1>
   </div>
 
-  <div id="gradeView">
-    <h2 id="gradeTitle"></h2>
-    <div id="videoList"></div>
-    <br>
-    <button class="btn" onclick="showAdminPanel()">🔐 Admin Panel</button>
-    <br><br>
-    <button class="btn" onclick="goHome()">⬅️ ආපසු යන්න</button>
-  </div>
+  <div id="mainContent" style="display:none;">
+    <h1>VISHWA EDUCATION</h1>
+    <h3>පන්ති තෝරන්න</h3>
 
-  <div id="adminPanel">
-    <h3>📤 Catbox Video URL එක ඇතුළත් කරන්න</h3>
-    <input type="text" id="videoURL" placeholder="https://files.catbox.moe/abc123.mp4" size="50">
-    <br><br>
-    <button class="btn" onclick="addVideo()">🔗 Link Add කරන්න</button>
+    <div id="gradeButtons">
+      <button class="btn" onclick="accessGrade('6')">6 වසර</button>
+      <button class="btn" onclick="accessGrade('7')">7 වසර</button>
+      <button class="btn" onclick="accessGrade('8')">8 වසර</button>
+      <button class="btn" onclick="accessGrade('9')">9 වසර</button>
+      <button class="btn" onclick="accessGrade('10')">10 වසර</button>
+      <button class="btn" onclick="accessGrade('11')">11 වසර</button>
+    </div>
+
+    <div id="gradeView">
+      <h2 id="gradeTitle"></h2>
+      <div id="videoList"></div>
+      <br>
+      <button class="btn" onclick="showAdminPanel()">🔐 Admin Panel</button>
+      <br><br>
+      <button class="btn" onclick="goHome()">⬅️ ආපසු යන්න</button>
+    </div>
+
+    <div id="adminPanel">
+      <h3>📤 Catbox Video URL එක ඇතුළත් කරන්න</h3>
+      <input type="text" id="videoURL" placeholder="https://files.catbox.moe/abc123.mp4">
+      <br><br>
+      <button class="btn" onclick="addVideo()">🔗 Link Add කරන්න</button>
+    </div>
   </div>
 
   <script>
     let currentGrade = "";
     let isAdmin = false;
 
+    window.onload = function() {
+      setTimeout(() => {
+        document.getElementById("loadingScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+      }, 2500);
+    };
+
     function accessGrade(grade) {
       const pw = prompt("පන්ති සඳහා මුරපදය ඇතුළත් කරන්න:");
-      if (pw === "VISHWA1") {
+      if (pw && pw.trim() === "VISHWA1") {
         currentGrade = grade;
         document.getElementById("gradeTitle").innerText = `${grade} වසර`;
         document.getElementById("gradeButtons").style.display = "none";
@@ -86,14 +172,14 @@
     function goHome() {
       currentGrade = "";
       isAdmin = false;
-      document.getElementById("gradeButtons").style.display = "block";
+      document.getElementById("gradeButtons").style.display = "flex";
       document.getElementById("gradeView").style.display = "none";
       document.getElementById("adminPanel").style.display = "none";
     }
 
     function showAdminPanel() {
       const pw = prompt("Admin මුරපදය ඇතුළත් කරන්න:");
-      if (pw === "VISHWA01@@") {
+      if (pw && pw.trim() === "VISHWA01@@") {
         isAdmin = true;
         document.getElementById("adminPanel").style.display = "block";
         renderVideos();
@@ -140,4 +226,4 @@
   </script>
 
 </body>
-  </html>
+</html>
