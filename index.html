@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <title>VISHWA EDUCATION</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f9f9f9;
+      text-align: center;
+      padding: 2rem;
+    }
+    .btn {
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #00796B;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #gradeView, #adminPanel {
+      display: none;
+      margin-top: 20px;
+    }
+    .video-entry {
+      margin: 10px 0;
+    }
+    .delete-btn {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      margin-left: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>VISHWA EDUCATION</h1>
+  <h3>පන්ති තෝරන්න</h3>
+  <div id="gradeButtons">
+    <button class="btn" onclick="accessGrade('6')">6 වසර</button>
+    <button class="btn" onclick="accessGrade('7')">7 වසර</button>
+    <button class="btn" onclick="accessGrade('8')">8 වසර</button>
+    <button class="btn" onclick="accessGrade('9')">9 වසර</button>
+    <button class="btn" onclick="accessGrade('10')">10 වසර</button>
+    <button class="btn" onclick="accessGrade('11')">11 වසර</button>
+  </div>
+
+  <div id="gradeView">
+    <h2 id="gradeTitle"></h2>
+    <div id="videoList"></div>
+    <br>
+    <button class="btn" onclick="showAdminPanel()">🔐 Admin Panel</button>
+    <br><br>
+    <button class="btn" onclick="goHome()">⬅️ ආපසු යන්න</button>
+  </div>
+
+  <div id="adminPanel">
+    <h3>📤 Catbox Video URL එක ඇතුළත් කරන්න</h3>
+    <input type="text" id="videoURL" placeholder="https://files.catbox.moe/abc123.mp4" size="50">
+    <br><br>
+    <button class="btn" onclick="addVideo()">🔗 Link Add කරන්න</button>
+  </div>
+
+  <script>
+    let currentGrade = "";
+    let isAdmin = false;
+
+    function accessGrade(grade) {
+      const pw = prompt("පන්ති සඳහා මුරපදය ඇතුළත් කරන්න:");
+      if (pw === "VISHWA1") {
+        currentGrade = grade;
+        document.getElementById("gradeTitle").innerText = `${grade} වසර`;
+        document.getElementById("gradeButtons").style.display = "none";
+        document.getElementById("gradeView").style.display = "block";
+        renderVideos();
+      } else {
+        alert("මුරපදය වැරදියි!");
+      }
+    }
+
+    function goHome() {
+      currentGrade = "";
+      isAdmin = false;
+      document.getElementById("gradeButtons").style.display = "block";
+      document.getElementById("gradeView").style.display = "none";
+      document.getElementById("adminPanel").style.display = "none";
+    }
+
+    function showAdminPanel() {
+      const pw = prompt("Admin මුරපදය ඇතුළත් කරන්න:");
+      if (pw === "VISHWA01@@") {
+        isAdmin = true;
+        document.getElementById("adminPanel").style.display = "block";
+        renderVideos();
+      } else {
+        alert("Admin මුරපදය වැරදියි!");
+      }
+    }
+
+    function addVideo() {
+      const url = document.getElementById("videoURL").value.trim();
+      if (!url) {
+        alert("URL එක ඇතුළත් කරන්න!");
+        return;
+      }
+      const videos = JSON.parse(localStorage.getItem("videos_" + currentGrade)) || [];
+      videos.push(url);
+      localStorage.setItem("videos_" + currentGrade, JSON.stringify(videos));
+      document.getElementById("videoURL").value = "";
+      renderVideos();
+    }
+
+    function deleteVideo(index) {
+      if (!confirm("ඔබට විඩියෝ එක delete කරන්න අවශ්‍යද?")) return;
+      const videos = JSON.parse(localStorage.getItem("videos_" + currentGrade)) || [];
+      videos.splice(index, 1);
+      localStorage.setItem("videos_" + currentGrade, JSON.stringify(videos));
+      renderVideos();
+    }
+
+    function renderVideos() {
+      const container = document.getElementById("videoList");
+      container.innerHTML = "";
+      const videos = JSON.parse(localStorage.getItem("videos_" + currentGrade)) || [];
+      videos.forEach((url, index) => {
+        const div = document.createElement("div");
+        div.className = "video-entry";
+        div.innerHTML = `
+          <a href="${url}" target="_blank">${url}</a>
+          ${isAdmin ? `<button class="delete-btn" onclick="deleteVideo(${index})">Delete</button>` : ""}
+        `;
+        container.appendChild(div);
+      });
+    }
+  </script>
+
+</body>
+  </html>
