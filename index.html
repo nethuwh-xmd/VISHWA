@@ -2,228 +2,242 @@
 <html lang="si">
 <head>
   <meta charset="UTF-8">
-  <title>VISHWA EDUCATION</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Noto+Sans+Sinhala&display=swap" rel="stylesheet">
+  <title>SMART MATHEMATICS & SCIENCE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Noto+Sans+Sinhala:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Noto Sans Sinhala', sans-serif;
       margin: 0;
-      padding: 0;
-      background-image: url('https://files.catbox.moe/14fj9q.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: #ffffff;
-      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      overflow-x: hidden;
     }
 
-    #loadingScreen {
+    .navbar {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: black;
+      top: 0;
+      width: 100%;
+      z-index: 100;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      z-index: 9999;
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 30px 40px;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
 
-    #loadingText {
-      font-family: 'Bangers', cursive;
-      font-size: 3.5rem;
-      animation: pulse 1.5s infinite;
-      color: #00FFCC;
-      text-shadow: 0 0 20px #00FFCC;
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.2;
     }
 
-    @keyframes pulse {
-      0% { opacity: 0.2; transform: scale(0.95); }
-      50% { opacity: 1; transform: scale(1.05); }
-      100% { opacity: 0.2; transform: scale(0.95); }
+    .brand-text {
+      font-family: 'Fugaz One', cursive;
+      font-size: 20px;
+      background: linear-gradient(270deg, #00ff99, #00c3ff, #ee0979, #ff6a00);
+      background-size: 800% 800%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: colorShift 5s linear infinite;
     }
 
-    h1 {
-      font-family: 'Bangers', cursive;
-      font-size: 3rem;
-      color: #ff4081;
-      text-shadow: 2px 2px 10px #000;
-      margin-top: 2rem;
+    .with-kamal {
+      font-family: 'Noto Sans Sinhala', sans-serif;
+      font-size: 14px;
+      color: #fff;
+      opacity: 0.8;
     }
 
-    h3 {
-      font-size: 1.5rem;
-      color: #00e5ff;
-      text-shadow: 1px 1px 5px #000;
+    @keyframes colorShift {
+      0% { background-position: 0% 50% }
+      100% { background-position: 100% 50% }
     }
 
-    .btn {
-      padding: 12px 24px;
-      margin: 10px;
-      background: linear-gradient(135deg, #ff4081, #7c4dff);
-      color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-      transition: transform 0.2s ease;
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
     }
 
-    .btn:hover {
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(1.2) contrast(1.05);
       transform: scale(1.05);
     }
 
-    #gradeButtons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 150px;
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
     }
 
-    #gradeView, #adminPanel {
+    .content {
+      padding: 100px 30px 60px;
+      text-align: center;
+    }
+
+    .content h2 {
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      font-size: 20px;
+      color: #555;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .class-btn {
+      margin: 10px;
+      padding: 18px 36px;
+      font-size: 22px;
+      background-color: #ff6a00;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+
+    .class-btn:hover {
+      background-color: #ee0979;
+      transform: scale(1.05);
+    }
+
+    .admission-form {
       display: none;
+      padding: 60px 30px;
+      background-color: #fff;
+      text-align: center;
+    }
+
+    .admission-form h2 {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    .admission-form input {
+      width: 90%;
+      max-width: 500px;
+      padding: 16px;
+      margin: 12px 0;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .admission-form button {
+      padding: 16px 32px;
+      font-size: 20px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
       margin-top: 20px;
     }
 
-    .video-entry {
-      margin: 10px 0;
+    .admission-form button:hover {
+      background-color: #128C7E;
     }
 
-    .delete-btn {
-      background-color: red;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      margin-left: 10px;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-
-    input[type="text"] {
-      padding: 8px;
-      border-radius: 4px;
-      border: none;
-      width: 80%;
-      max-width: 500px;
+    .fee-info {
+      margin-top: 40px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
     }
   </style>
 </head>
 <body>
 
-  <div id="loadingScreen">
-    <h1 id="loadingText">VISHWA</h1>
+  <div class="navbar">
+    <div class="logo">
+      <span class="brand-text">SMART MATHEMATICS & SCIENCE</span>
+      <span class="with-kamal">WITH KAMAL BANDARA</span>
+    </div>
   </div>
 
-  <div id="mainContent" style="display:none;">
-    <h1>VISHWA EDUCATION</h1>
-    <h3>පන්ති තෝරන්න</h3>
+  <div class="hero">
+    <img src="https://files.catbox.moe/vnfovc.jpg" alt="කමල් බණ්ඩාර">
+    <div class="overlay"></div>
+  </div>
 
-    <div id="gradeButtons">
-      <button class="btn" onclick="accessGrade('6')">6 වසර</button>
-      <button class="btn" onclick="accessGrade('7')">7 වසර</button>
-      <button class="btn" onclick="accessGrade('8')">8 වසර</button>
-      <button class="btn" onclick="accessGrade('9')">9 වසර</button>
-      <button class="btn" onclick="accessGrade('10')">10 වසර</button>
-      <button class="btn" onclick="accessGrade('11')">11 වසර</button>
+  <div class="content">
+    <h2>ඔබට සාදරයෙන් පිළිගනිමු</h2>
+    <p>ඔබට අදාල වසර තෝරාගෙන ඇතුළත් වීමේ විස්තර පිරවිය හැකිය.</p>
+    <div style="margin-top: 40px;">
+      <button onclick="showForm(6)" class="class-btn">6 වසර</button>
+      <button onclick="showForm(7)" class="class-btn">7 වසර</button>
+      <button onclick="showForm(8)" class="class-btn">8 වසර</button>
+      <button onclick="showForm(9)" class="class-btn">9 වසර</button>
+      <button onclick="showForm(10)" class="class-btn">10 වසර</button>
+      <button onclick="showForm(11)" class="class-btn">11 වසර</button>
     </div>
+  </div>
 
-    <div id="gradeView">
-      <h2 id="gradeTitle"></h2>
-      <div id="videoList"></div>
-      <br>
-      <button class="btn" onclick="showAdminPanel()">🔐 Admin Panel</button>
-      <br><br>
-      <button class="btn" onclick="goHome()">⬅️ ආපසු යන්න</button>
-    </div>
+  <div id="admission-form" class="admission-form">
+    <h2 id="form-title">ඇතුළත් වීමේ විස්තර</h2>
+    <input type="text" id="school" placeholder="ඔබගේ පාසල"><br>
+    <input type="text" id="phone" placeholder="දුරකථන අංකය"><br>
+    <input type="text" id="name" placeholder="සම්පූර්ණ නම"><br>
+    <input type="text" id="village" placeholder="ගම"><br>
+    <button onclick="sendWhatsApp()">WhatsApp හරහා යවන්න</button>
 
-    <div id="adminPanel">
-      <h3>📤 Catbox Video URL එක ඇතුළත් කරන්න</h3>
-      <input type="text" id="videoURL" placeholder="https://files.catbox.moe/abc123.mp4">
-      <br><br>
-      <button class="btn" onclick="addVideo()">🔗 Link Add කරන්න</button>
+    <div class="fee-info" id="fee-info">
+      CLASS FEE = L.K.R 1600<br>
+      FREE MODULE AND PAPERS
     </div>
   </div>
 
   <script>
-    let currentGrade = "";
-    let isAdmin = false;
+    let selectedGrade = 6;
 
-    window.onload = function() {
-      setTimeout(() => {
-        document.getElementById("loadingScreen").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-      }, 2500);
-    };
+    function showForm(grade) {
+      selectedGrade = grade;
+      const form = document.getElementById('admission-form');
+      const title = document.getElementById('form-title');
+      const feeInfo = document.getElementById('fee-info');
 
-    function accessGrade(grade) {
-      const pw = prompt("පන්ති සඳහා මුරපදය ඇතුළත් කරන්න:");
-      if (pw && pw.trim() === "VISHWA1") {
-        currentGrade = grade;
-        document.getElementById("gradeTitle").innerText = `${grade} වසර`;
-        document.getElementById("gradeButtons").style.display = "none";
-        document.getElementById("gradeView").style.display = "block";
-        renderVideos();
-      } else {
-        alert("මුරපදය වැරදියි!");
-      }
+      title.textContent = `${grade} වසර සඳහා ඇතුළත් වීම`;
+      feeInfo.innerHTML = `CLASS FEE = L.K.R 1600<br>FREE MODULE AND PAPERS`;
+
+      form.style.display = 'block';
+      form.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    function goHome() {
-      currentGrade = "";
-      isAdmin = false;
-      document.getElementById("gradeButtons").style.display = "flex";
-      document.getElementById("gradeView").style.display = "none";
-      document.getElementById("adminPanel").style.display = "none";
-    }
+    function sendWhatsApp() {
+      const school = document.getElementById('school').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const name = document.getElementById('name').value.trim();
+      const village = document.getElementById('village').value.trim();
 
-    function showAdminPanel() {
-      const pw = prompt("Admin මුරපදය ඇතුළත් කරන්න:");
-      if (pw && pw.trim() === "VISHWA01@@") {
-        isAdmin = true;
-        document.getElementById("adminPanel").style.display = "block";
-        renderVideos();
-      } else {
-        alert("Admin මුරපදය වැරදියි!");
-      }
-    }
+      const message = 
+        `${selectedGrade} වසර සඳහා ඇතුළත් වීම:\n\n` +
+        `පාසල: ${school}\n` +
+        `දුරකථන: ${phone}\n` +
+        `නම: ${name}\n` +
+        `ගම: ${village}\n\n` +
+        `Tuition Fee for Grade ${selectedGrade}: Rs. 1600\n` +
+        `FREE MODULE AND PAPERS`;
 
-    function addVideo() {
-      const url = document.getElementById("videoURL").value.trim();
-      if (!url) {
-        alert("URL එක ඇතුළත් කරන්න!");
-        return;
-      }
-      const videos = JSON.parse(localStorage.getItem("videos_" + currentGrade)) || [];
-      videos.push(url);
-      localStorage.setItem("videos_" + currentGrade, JSON.stringify(videos));
-      document.getElementById("videoURL").value = "";
-      renderVideos();
-    }
-
-    function deleteVideo(index) {
-      if (!confirm("ඔබට විඩියෝ එක delete කරන්න අවශ්‍යද?")) return;
-      const videos = JSON.parse(localStorage.getItem("videos_" + currentGrade)) || [];
-      videos.splice(index, 1);
-      localStorage.setItem("videos_" + currentGrade, JSON.stringify(videos));
-      renderVideos();
-    }
-
-    function renderVideos() {
-      const container = document.getElementById("videoList");
-      container.innerHTML = "";
-      const videos = JSON.parse(localStorage.getItem("videos_" + currentGrade)) || [];
-      videos.forEach((url, index) => {
-        const div = document.createElement("div");
-        div.className = "video-entry";
-        div.innerHTML = `
-          <a href="${url}" target="_blank">${url}</a>
-          ${isAdmin ? `<button class="delete-btn" onclick="deleteVideo(${index})">Delete</button>` : ""}
-        `;
-        container.appendChild(div);
-      });
+      const whatsappNumber = "94767628221";
+      const encodedMessage = encodeURIComponent(message);
+      const url = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+      window.open(url, '_blank');
     }
   </script>
 
 </body>
-</html>
+  </html>
