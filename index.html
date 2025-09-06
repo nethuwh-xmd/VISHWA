@@ -2,242 +2,184 @@
 <html lang="si">
 <head>
   <meta charset="UTF-8">
-  <title>SMART MATHEMATICS & SCIENCE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Noto+Sans+Sinhala:wght@700&display=swap" rel="stylesheet">
+  <title>SMART EDUCATION - Login & Signup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
-      overflow-x: hidden;
-    }
-
-    .navbar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 100;
+      background: linear-gradient(to right, #00c3ff, #ff6a00);
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      background-color: rgba(0, 0, 0, 0.85);
-      padding: 30px 40px;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
-
-    .logo {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      line-height: 1.2;
-    }
-
-    .brand-text {
-      font-family: 'Fugaz One', cursive;
-      font-size: 20px;
-      background: linear-gradient(270deg, #00ff99, #00c3ff, #ee0979, #ff6a00);
-      background-size: 800% 800%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: colorShift 5s linear infinite;
-    }
-
-    .with-kamal {
-      font-family: 'Noto Sans Sinhala', sans-serif;
-      font-size: 14px;
-      color: #fff;
-      opacity: 0.8;
-    }
-
-    @keyframes colorShift {
-      0% { background-position: 0% 50% }
-      100% { background-position: 100% 50% }
-    }
-
-    .hero {
-      position: relative;
-      width: 100%;
       height: 100vh;
-      overflow: hidden;
     }
 
-    .hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(1.2) contrast(1.05);
-      transform: scale(1.05);
-    }
-
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
-    }
-
-    .content {
-      padding: 100px 30px 60px;
-      text-align: center;
-    }
-
-    .content h2 {
-      font-size: 36px;
-      color: #333;
-      margin-bottom: 20px;
-    }
-
-    .content p {
-      font-size: 20px;
-      color: #555;
-      max-width: 700px;
-      margin: auto;
-    }
-
-    .class-btn {
-      margin: 10px;
-      padding: 18px 36px;
-      font-size: 22px;
-      background-color: #ff6a00;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-    }
-
-    .class-btn:hover {
-      background-color: #ee0979;
-      transform: scale(1.05);
-    }
-
-    .admission-form {
-      display: none;
-      padding: 60px 30px;
+    .container {
       background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 450px;
       text-align: center;
     }
 
-    .admission-form h2 {
+    h2 {
+      margin-bottom: 20px;
       font-size: 28px;
-      margin-bottom: 30px;
+      color: #333;
     }
 
-    .admission-form input {
-      width: 90%;
-      max-width: 500px;
-      padding: 16px;
-      margin: 12px 0;
-      font-size: 18px;
+    input {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 8px;
     }
 
-    .admission-form button {
-      padding: 16px 32px;
-      font-size: 20px;
-      background-color: #25D366;
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      background-color: #ff6a00;
       color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #ee0979;
+    }
+
+    .toggle-btn {
+      background-color: transparent;
+      color: #0077b6;
+      border: none;
       margin-top: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: underline;
     }
 
-    .admission-form button:hover {
-      background-color: #128C7E;
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
     }
 
-    .fee-info {
-      margin-top: 40px;
-      font-size: 24px;
-      font-weight: bold;
-      color: #333;
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
 
-  <div class="navbar">
-    <div class="logo">
-      <span class="brand-text">SMART MATHEMATICS & SCIENCE</span>
-      <span class="with-kamal">WITH KAMAL BANDARA</span>
-    </div>
-  </div>
+  <div class="container">
+    <h2 id="formTitle">ලියාපදිංචි වන්න</h2>
 
-  <div class="hero">
-    <img src="https://files.catbox.moe/vnfovc.jpg" alt="කමල් බණ්ඩාර">
-    <div class="overlay"></div>
-  </div>
+    <!-- Signup Form -->
+    <form id="signupForm">
+      <input type="text" id="name" placeholder="නම" required>
+      <input type="text" id="grade" placeholder="වසර" required>
+      <input type="email" id="signupEmail" placeholder="Gmail ලිපිනය" required>
+      <input type="password" id="signupPassword" placeholder="කැමති Password එකක්" required>
+      <input type="password" id="retypePassword" placeholder="Retype Password" required>
+      <button type="submit">Signup</button>
+      <div class="error" id="signupError"></div>
+    </form>
 
-  <div class="content">
-    <h2>ඔබට සාදරයෙන් පිළිගනිමු</h2>
-    <p>ඔබට අදාල වසර තෝරාගෙන ඇතුළත් වීමේ විස්තර පිරවිය හැකිය.</p>
-    <div style="margin-top: 40px;">
-      <button onclick="showForm(6)" class="class-btn">6 වසර</button>
-      <button onclick="showForm(7)" class="class-btn">7 වසර</button>
-      <button onclick="showForm(8)" class="class-btn">8 වසර</button>
-      <button onclick="showForm(9)" class="class-btn">9 වසර</button>
-      <button onclick="showForm(10)" class="class-btn">10 වසර</button>
-      <button onclick="showForm(11)" class="class-btn">11 වසර</button>
-    </div>
-  </div>
+    <!-- Login Form -->
+    <form id="loginForm" class="hidden">
+      <input type="email" id="loginEmail" placeholder="Gmail ලිපිනය" required>
+      <input type="password" id="loginPassword" placeholder="Password එක" required>
+      <button type="submit">Login</button>
+      <div class="error" id="loginError"></div>
+    </form>
 
-  <div id="admission-form" class="admission-form">
-    <h2 id="form-title">ඇතුළත් වීමේ විස්තර</h2>
-    <input type="text" id="school" placeholder="ඔබගේ පාසල"><br>
-    <input type="text" id="phone" placeholder="දුරකථන අංකය"><br>
-    <input type="text" id="name" placeholder="සම්පූර්ණ නම"><br>
-    <input type="text" id="village" placeholder="ගම"><br>
-    <button onclick="sendWhatsApp()">WhatsApp හරහා යවන්න</button>
-
-    <div class="fee-info" id="fee-info">
-      CLASS FEE = L.K.R 1600<br>
-      FREE MODULE AND PAPERS
-    </div>
+    <button class="toggle-btn" onclick="toggleForms()">Login එකට යන්න / Signup එකට යන්න</button>
   </div>
 
   <script>
-    let selectedGrade = 6;
+    function toggleForms() {
+      const signupForm = document.getElementById('signupForm');
+      const loginForm = document.getElementById('loginForm');
+      const formTitle = document.getElementById('formTitle');
 
-    function showForm(grade) {
-      selectedGrade = grade;
-      const form = document.getElementById('admission-form');
-      const title = document.getElementById('form-title');
-      const feeInfo = document.getElementById('fee-info');
-
-      title.textContent = `${grade} වසර සඳහා ඇතුළත් වීම`;
-      feeInfo.innerHTML = `CLASS FEE = L.K.R 1600<br>FREE MODULE AND PAPERS`;
-
-      form.style.display = 'block';
-      form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (signupForm.classList.contains('hidden')) {
+        signupForm.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+        formTitle.textContent = "ලියාපදිංචි වන්න";
+      } else {
+        signupForm.classList.add('hidden');
+        loginForm.classList.remove('hidden');
+        formTitle.textContent = "Login වන්න";
+      }
     }
 
-    function sendWhatsApp() {
-      const school = document.getElementById('school').value.trim();
-      const phone = document.getElementById('phone').value.trim();
+    document.getElementById('signupForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
       const name = document.getElementById('name').value.trim();
-      const village = document.getElementById('village').value.trim();
+      const grade = document.getElementById('grade').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
+      const password = document.getElementById('signupPassword').value;
+      const retype = document.getElementById('retypePassword').value;
+      const errorMsg = document.getElementById('signupError');
 
-      const message = 
-        `${selectedGrade} වසර සඳහා ඇතුළත් වීම:\n\n` +
-        `පාසල: ${school}\n` +
-        `දුරකථන: ${phone}\n` +
-        `නම: ${name}\n` +
-        `ගම: ${village}\n\n` +
-        `Tuition Fee for Grade ${selectedGrade}: Rs. 1600\n` +
-        `FREE MODULE AND PAPERS`;
+      if (password !== retype) {
+        errorMsg.textContent = "Password එක match වෙන්නේ නැහැ!";
+        return;
+      }
 
-      const whatsappNumber = "94767628221";
-      const encodedMessage = encodeURIComponent(message);
-      const url = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-      window.open(url, '_blank');
-    }
+      try {
+        const res = await fetch('/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, grade, email, password })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          alert("Signup සාර්ථකයි!");
+          document.getElementById('signupForm').reset();
+          toggleForms();
+        } else {
+          errorMsg.textContent = data.message || "Signup failed!";
+        }
+      } catch (err) {
+        errorMsg.textContent = "Server එකට connect වෙන්න බැරි වුණා.";
+      }
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const errorMsg = document.getElementById('loginError');
+
+      try {
+        const res = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          alert("Login සාර්ථකයි!");
+          window.location.href = "/dashboard";
+        } else {
+          errorMsg.textContent = data.message || "Login failed!";
+        }
+      } catch (err) {
+        errorMsg.textContent = "Server එකට connect වෙන්න බැරි වුණා.";
+      }
+    });
   </script>
 
 </body>
-  </html>
+</html>
